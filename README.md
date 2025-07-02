@@ -3,5 +3,5 @@ A demo app for React and Django Deployment
 
 docker-compose down
 docker-compose up -d
-add webhook
-add repo url 
+add webhooks
+add repository url
