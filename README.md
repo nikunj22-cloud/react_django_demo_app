@@ -6,3 +6,4 @@ docker-compose up -d
 add webhooks
 add repository url
 add webhook in local
+add jenkins file in local
