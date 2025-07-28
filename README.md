@@ -5,3 +5,4 @@ docker-compose down
 docker-compose up -d
 add webhooks
 add repository url
+add webhook in local
