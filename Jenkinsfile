@@ -1,31 +1,44 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds-id') // Jenkins credentials ka ID
+        DOCKER_IMAGE = 'your-dockerhub-username/your-app-name'
+    }
+
     stages {
         stage('Clone') {
             steps {
                 echo 'Cloning repo...'
+                // git 'https://github.com/your/repo.git'  // Optional if not using multibranch
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Running build steps...'
-                // sh 'npm install' or python setup steps
+                echo 'Building Docker image...'
+                sh 'docker build -t $DOCKER_IMAGE .'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // sh 'npm test' or pytest
+                // sh 'npm test' or pytest etc.
             }
         }
 
-        stage('Deploy') {
+        stage('Login to DockerHub') {
             steps {
-                echo 'Deploying...'
-                // sh './deploy.sh' or custom command
+                echo 'Logging into DockerHub...'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+        stage('Push to DockerHub') {
+            steps {
+                echo 'Pushing Docker image to DockerHub...'
+                sh 'docker push $DOCKER_IMAGE'
             }
         }
     }
