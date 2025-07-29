@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub') // Jenkins credentials ka ID
-        DOCKER_IMAGE = 'your-dockerhub-username/your-app-name'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub') // Jenkins credentials ID
+        DOCKER_IMAGE = 'dockernikunj22/react_django_demo_app'
     }
 
     stages {
